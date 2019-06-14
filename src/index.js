@@ -1,122 +1,48 @@
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import ReactDOM from 'react-dom';
 
-import Icons from './icons';
-import './styles.css';
+import ToastContainer from './components/ToastContainer';
+import Toast from './components/Toast';
 
-const colors = {
-	success: '#6EC05F',
-	info: '#1271EC',
-	warn: '#FED953',
-	error: '#D60A2E',
-	loading: '#0088ff',
-};
+import './styles/styles.css';
 
-const getDOMNodeFromReact = (reactNode) => {
-	const div = document.createElement('div');
-	div.innerHTML = ReactDOMServer.renderToString(reactNode).trim();
-	return div.firstChild;
-};
+let ctToastCount = 0;
 
-const create = (text, options) => {
-	const {
-		type = 'info',
-		hideAfter = 3,
-		heading,
-		position = 'top-center',
-		icon,
-		bar = {},
-		onClick,
-	} = options;
+const cogoToast = (text, options) => {
+	let rootContainer = document.getElementById('ct-container');
 
-	if (!document.getElementById('ct-container')) {
-		document.body.appendChild(
-			getDOMNodeFromReact(
-				<div id="ct-container" className="ct-container">
-					<div id="ct-top" className="ct-row">
-						<div id="ct-top-left" className="ct-group" />
-						<div id="ct-top-center" className="ct-group" />
-						<div id="ct-top-right" className="ct-group" />
-					</div>
-					<div id="ct-bottom" className="ct-row">
-						<div id="ct-bottom-left" className="ct-group ct-flex-bottom" />
-						<div id="ct-bottom-center" className="ct-group ct-flex-bottom" />
-						<div id="ct-bottom-right" className="ct-group ct-flex-bottom" />
-					</div>
-				</div>,
-			),
-		);
+	if (!rootContainer) {
+		rootContainer = document.createElement('div');
+		rootContainer.id = 'ct-container';
+		document.body.append(rootContainer);
 	}
 
-	const parentNode =		document.body.clientWidth > 768
-		? document.getElementById(`ct-${position}`)
-		: document.getElementById(`ct-${position.includes('bottom') ? 'bottom' : 'top'}`);
+	ctToastCount += 1;
 
-	const CurrentIcon = Icons[type];
-	const place = position.includes('bottom') ? 'Bottom' : 'Top';
+	const hideTime = (options.hideAfter === undefined ? 3 : options.hideAfter) * 1000;
+	const toast = { id: ctToastCount, text, ...options };
 
-	const toastClass = `ct-toast${onClick ? ' ct-cursor-pointer' : ''}`;
-
-	const borderLeft = `${bar.size || '3px'} ${bar.style || 'solid'} ${bar.color || colors[type]}`;
-	const marginType = `margin${place}`;
-
-	const toastStyle = {
-		paddingLeft: heading ? 25 : undefined,
-		minHeight: heading ? 50 : undefined,
-		opacity: 0,
-		borderLeft,
-		[marginType]: -15,
-	};
-
-	const toastNode = getDOMNodeFromReact(
-		<div className={toastClass} style={toastStyle}>
-			{icon || (type !== 'loading' ? <CurrentIcon /> : <div className="ct-icon-loading" />)}
-			<div className="ct-text-group" style={heading ? { marginLeft: 25 } : {}}>
-				{heading && <h4 className="ct-heading">{heading}</h4>}
-				<div className="ct-text">{text}</div>
-			</div>
-		</div>,
-	);
-
-	if (onClick) {
-		toastNode.addEventListener('click', onClick);
-	}
-
-	setTimeout(() => {
-		toastNode.style.opacity = 1;
-		toastNode.style[`margin-${place.toLowerCase()}`] = '15px';
-	}, 10);
-
-	parentNode.appendChild(toastNode);
+	ReactDOM.render(<ToastContainer toast={toast} />, rootContainer);
 
 	const hide = () => {
-		toastNode.style.opacity = 0;
-		toastNode.style[`margin-${place.toLowerCase()}`] = '-15px';
-		setTimeout(() => parentNode.removeChild(toastNode), 300);
+		ReactDOM.render(<ToastContainer hiddenID={toast.id} />, rootContainer);
 	};
 
-	if (hideAfter <= 0) {
-		return hide;
-	}
-	return new Promise((resolve) => {
+	const completePromise = new Promise((resolve) => {
 		setTimeout(() => {
-			hide();
 			resolve();
-		}, hideAfter * 1000);
+		}, hideTime);
 	});
+
+	return hideTime <= 0 ? hide : completePromise;
 };
 
-const success = (text, options) => create(text, { ...options, type: 'success' });
-const warn = (text, options) => create(text, { ...options, text, type: 'warn' });
-const error = (text, options) => create(text, { ...options, text, type: 'error' });
-const info = (text, options) => create(text, { ...options, text, type: 'info' });
-const loading = (text, options) => create(text, { ...options, text, type: 'loading' });
+const types = ['success', 'info', 'warn', 'error', 'loading'];
 
-export default {
-	success,
-	warn,
-	error,
-	info,
-	loading,
-	create,
-};
+types.forEach((type) => {
+	cogoToast[type] = (text, options) => cogoToast(text, { ...options, type });
+});
+
+export { Toast };
+
+export default cogoToast;
