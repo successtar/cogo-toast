@@ -6,7 +6,7 @@
 [![Dependencies](https://img.shields.io/david/Cogoport/cogo-toast.svg)](https://david-dm.org/Cogoport/cogo-toast.svg)
 [![DevDependencies](https://img.shields.io/david/dev/Cogoport/cogo-toast.svg)](https://david-dm.org/Cogoport/cogo-toast?type=dev)
 [![npm package](https://img.shields.io/npm/v/cogo-toast/latest.svg)](https://www.npmjs.com/package/cogo-toast)
-[![Small size](https://img.badgesize.io/https://unpkg.com/cogo-toast/dist/index.js?compression=gzip)](https://unpkg.com/cogo-toast@2.0.1/dist/index.js)
+[![Small size](https://img.badgesize.io/https://unpkg.com/cogo-toast/dist/index.js?compression=gzip)](https://unpkg.com/cogo-toast/dist/index.js)
 [![npm downloads](https://img.shields.io/npm/dm/cogo-toast.svg)](https://www.npmjs.com/package/cogo-toast)
 ![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
 [![License](https://img.shields.io/npm/l/@xstyled/styled-components.svg)](https://github.com/Cogoport/cogo-toast/blob/master/LICENSE)
