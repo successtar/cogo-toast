@@ -10,9 +10,9 @@ const Types = () => (
 	<CodePanel heading="Only ~ 4K Gzipped">
 		<Section>
 			<Paragraph>
-				The package contains the minified build file, along with the SVG Icons and the Styles, built
-				into the Code, with a total of ~4K Gzipped
+				The package contains the minified build file, along with the SVG Icons and the Styles
 			</Paragraph>
+			<Paragraph>Built into the Code, with a total of ~4K Gzipped</Paragraph>
 		</Section>
 		<Section>
 			<a href="https://github.com/Cogoport/cogo-toast" target="_blank" rel="noopener">
