@@ -13,7 +13,6 @@
 
 <p align="center"><img src="docs/static/images/preview.png" alt="cogo-toast-preview" title="cogo-toast-preview"><p>
 
-
 ### Install via NPM:
 
 ```bash
@@ -76,6 +75,16 @@ cogoToast.loading('Loading your data...').then(() => {
 
 When hideAfter = 0, It returns a callback function that hides the toast, instead of a promise.
 
+### Hide on Click
+
+```javascript
+cogoToast.success('This is a success message.', {
+	onClick: hide => {
+		hide();
+	},
+});
+```
+
 ### Completely Customizable
 
 The second parameter to the function is an options object that can be passed in for customization.
@@ -88,14 +97,14 @@ cogoToast.info('This is an info message', options);
 
 Here's a list of all the available options, to customize the toast to your needs.
 
-|  Options   |                                               Type                                               |                          Default                           |
-| :--------: | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
-| hideAfter  |                                        Number in Seconds                                         | `3` <br />(Can be `0` to disable auto-hiding of the toast) |
-|  position  | `'top-left', 'top-center', 'top-right',` <br /> `'bottom-left', 'bottom-center', 'bottom-right'` |                       `'top-center'`                       |
-|  heading   |                                              String                                              |                            `''`                            |
-| renderIcon |                                       Function<ReactNode>                                        |                   Icon Based on the Type                   |
-|    bar     |           Object <br /> `{ size: '2px', style: 'solid/dashed/dotted', color: '#hex' }`           |                     Based on the Type                      |
-|  onClick   |                                             Function                                             |                           `null`                           |
+|    Options    |                                               Type                                               |                          Default                           |
+| :-----------: | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------: |
+|   hideAfter   |                                        Number in Seconds                                         | `3` <br />(Can be `0` to disable auto-hiding of the toast) |
+|   position    | `'top-left', 'top-center', 'top-right',` <br /> `'bottom-left', 'bottom-center', 'bottom-right'` |                       `'top-center'`                       |
+|    heading    |                                              String                                              |                            `''`                            |
+|  renderIcon   |                                       Function<ReactNode>                                        |                   Icon Based on the Type                   |
+|      bar      |           Object <br /> `{ size: '2px', style: 'solid/dashed/dotted', color: '#hex' }`           |                     Based on the Type                      |
+| onClick(hide) |                                             Function                                             |                           `null`                           |
 
 #### Custom Styling
 
