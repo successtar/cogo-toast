@@ -14,13 +14,13 @@
 <p align="center"><img src="docs/static/images/preview.png" alt="cogo-toast-preview" title="cogo-toast-preview"><p>
 
 
-Install via NPM:
+### Install via NPM:
 
 ```bash
 npm install --save cogo-toast
 ```
 
-Install via Yarn:
+### Install via Yarn:
 
 ```bash
 yarn add cogo-toast
