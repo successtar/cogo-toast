@@ -4,6 +4,8 @@
 	"version": "3.1.0",
 	"license": "MIT",
 	"scripts": {
+		"setup": "yarn install && cd docs && yarn install",
+		"add-contributor": "all-contributors add",
 		"dev-npm": "rollup -c -w",
 		"dev-docs": "cd docs && $npm_execpath run dev",
 		"dev": "concurrently --kill-others-on-fail \"$npm_execpath run dev-npm\" \"$npm_execpath run dev-docs\"",
@@ -25,6 +27,7 @@
 		"@babel/preset-env": "7.4.5",
 		"@babel/preset-react": "7.0.0",
 		"@svgr/rollup": "4.3.0",
+		"all-contributors-cli": "^6.7.0",
 		"babel-eslint": "10.0.1",
 		"concurrently": "4.1.0",
 		"cross-env": "5.2.0",
