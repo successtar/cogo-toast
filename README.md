@@ -116,10 +116,6 @@ For all classnames, refer to [/src/styles.css](/src/styles.css)
 
 The package contains the minified build file, along with the SVG Icons and the Styles, built into the Code, with a total of ~4K Gzipped
 
-### License
-
-`MIT`
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
