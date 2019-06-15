@@ -135,7 +135,7 @@ var Meta = function Meta() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
     key: "description",
     name: "description",
-    content: "Open Source, Plug and Play - Toast Messages System for React. ~ 4.2K Gzipped (All Inclusive of Icons, Styles, and Code) No configuration required.",
+    content: "Open Source, Plug and Play - Toast Messages System for React. ~ 4K Gzipped (All Inclusive of Icons, Styles, and Code) No configuration required.",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 42
