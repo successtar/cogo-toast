@@ -14,7 +14,7 @@
 		"@emotion/styled": "10.0.14",
 		"babel-plugin-emotion": "10.0.14",
 		"cogo-toast": "link:../",
-		"next": "^9.0.1",
+		"next": "^9.0.2",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6"
 	},
