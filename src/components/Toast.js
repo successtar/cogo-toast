@@ -17,7 +17,7 @@ const Toast = (props) => {
 	const place = (props.position || 'top-center').includes('bottom') ? 'Bottom' : 'Top';
 	const marginType = `margin${place}`;
 
-	const className = ['ct-toast', props.onClick ? ' ct-cursor-pointer' : ''].join(' ');
+	const className = ['ct-toast', props.onClick ? ' ct-cursor-pointer' : '', `ct-toast-${props.type}`].join(' ');
 	const borderLeft = `${props.bar.size || '3px'} ${props.bar.style || 'solid'} ${props.bar.color
 		|| colors[props.type]}`;
 
