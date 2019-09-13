@@ -57,12 +57,13 @@ function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
   if (Object.getOwnPropertySymbols) {
-    keys.push.apply(keys, Object.getOwnPropertySymbols(object));
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
   }
 
-  if (enumerableOnly) keys = keys.filter(function (sym) {
-    return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-  });
   return keys;
 }
 
@@ -111,6 +112,10 @@ function _iterableToArray(iter) {
 }
 
 function _iterableToArrayLimit(arr, i) {
+  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+    return;
+  }
+
   var _arr = [];
   var _n = true;
   var _d = false;
@@ -213,7 +218,7 @@ var colors = {
 var Toast = function Toast(props) {
   var place = (props.position || 'top-center').includes('bottom') ? 'Bottom' : 'Top';
   var marginType = "margin".concat(place);
-  var className = ['ct-toast', props.onClick ? ' ct-cursor-pointer' : ''].join(' ');
+  var className = ['ct-toast', props.onClick ? ' ct-cursor-pointer' : '', "ct-toast-".concat(props.type)].join(' ');
   var borderLeft = "".concat(props.bar.size || '3px', " ").concat(props.bar.style || 'solid', " ").concat(props.bar.color || colors[props.type]);
   var CurrentIcon = Icons[props.type];
 
@@ -1438,7 +1443,7 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
 
   // Check that the browser supports the APIs we need to implement our special
   // DEV version of invokeGuardedCallback
-  if ( true && typeof window.dispatchEvent === 'function' && typeof document !== 'undefined' && typeof document.createEvent === 'function') {
+  if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof document !== 'undefined' && typeof document.createEvent === 'function') {
     var fakeNode = document.createElement('react');
 
     var invokeGuardedCallbackDev = function (name, func, context, a, b, c, d, e, f) {
@@ -2477,7 +2482,7 @@ function accumulateDirectDispatches(events) {
   forEachAccumulated(events, accumulateDirectDispatchesSingle);
 }
 
-var canUseDOM = !!( true && window.document && window.document.createElement);
+var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 // Do not uses the below two methods directly!
 // Instead use constants exported from DOMTopLevelEventTypes in ReactDOM.
@@ -25293,7 +25298,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v0.13.6
+/* WEBPACK VAR INJECTION */(function(global) {/** @license React v0.13.6
  * scheduler.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -25789,9 +25794,11 @@ var cancelHostCallback;
 var shouldYieldToHost;
 
 var globalValue = null;
-if (true) {
+if (typeof window !== 'undefined') {
   globalValue = window;
-} else {}
+} else if (typeof global !== 'undefined') {
+  globalValue = global;
+}
 
 if (globalValue && globalValue._schedMock) {
   // Dynamic injection, only for testing purposes.
@@ -25803,7 +25810,7 @@ if (globalValue && globalValue._schedMock) {
 } else if (
 // If Scheduler runs in a non-DOM environment, it falls back to a naive
 // implementation using setTimeout.
- false ||
+typeof window === 'undefined' ||
 // Check if MessageChannel is supported, too.
 typeof MessageChannel !== 'function') {
   // If this accidentally gets imported in a non-browser environment, e.g. JavaScriptCore,
@@ -25991,6 +25998,7 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
   })();
 }
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../docs/node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -26082,6 +26090,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/common-util/code-block/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
@@ -26110,7 +26119,7 @@ var CodeBlock = function CodeBlock(_ref) {
     dracula: prism_react_renderer_themes_dracula__WEBPACK_IMPORTED_MODULE_12___default.a
   };
   var language = langClass.replace(/language-/, '');
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(prism_react_renderer__WEBPACK_IMPORTED_MODULE_4__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, prism_react_renderer__WEBPACK_IMPORTED_MODULE_4__["defaultProps"], {
+  return __jsx(prism_react_renderer__WEBPACK_IMPORTED_MODULE_4__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, prism_react_renderer__WEBPACK_IMPORTED_MODULE_4__["defaultProps"], {
     code: children,
     language: language,
     theme: themes[theme],
@@ -26125,7 +26134,7 @@ var CodeBlock = function CodeBlock(_ref) {
         tokens = _ref2.tokens,
         getLineProps = _ref2.getLineProps,
         getTokenProps = _ref2.getTokenProps;
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("pre", {
+    return __jsx("pre", {
       className: className,
       style: Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, style, {
         padding: '16px 24px',
@@ -26140,7 +26149,7 @@ var CodeBlock = function CodeBlock(_ref) {
       },
       __self: this
     }, tokens.map(function (line, i) {
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      return __jsx("div", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
         key: "line_".concat(i)
       }, getLineProps({
         line: line,
@@ -26152,7 +26161,7 @@ var CodeBlock = function CodeBlock(_ref) {
         },
         __self: this
       }), line.map(function (token, key) {
-        return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+        return __jsx("span", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
           key: "token_".concat(key)
         }, getTokenProps({
           token: token,
@@ -26196,10 +26205,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/common-util/code-panel/code-icon.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 var SvgComponent = function SvgComponent(props) {
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  return __jsx("svg", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     width: 20,
     height: 20,
     style: {
@@ -26213,14 +26223,14 @@ var SvgComponent = function SvgComponent(props) {
       lineNumber: 4
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("g", {
+  }), __jsx("g", {
     fill: "#1cd8d2",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("path", {
+  }, __jsx("path", {
     d: "M325.762 70.513l-17.706-4.854c-2.279-.76-4.524-.521-6.707.715-2.19 1.237-3.669 3.094-4.429 5.568L190.426 440.53c-.76 2.475-.522 4.809.715 6.995 1.237 2.19 3.09 3.665 5.568 4.425l17.701 4.856c2.284.766 4.521.526 6.71-.712 2.19-1.243 3.666-3.094 4.425-5.564L332.042 81.936c.759-2.474.523-4.808-.716-6.999-1.238-2.19-3.089-3.665-5.564-4.424zM166.167 142.465c0-2.474-.953-4.665-2.856-6.567l-14.277-14.276c-1.903-1.903-4.093-2.857-6.567-2.857s-4.665.955-6.567 2.857L2.856 254.666C.95 256.569 0 258.759 0 261.233s.953 4.664 2.856 6.566l133.043 133.044c1.902 1.906 4.089 2.854 6.567 2.854s4.665-.951 6.567-2.854l14.277-14.268c1.903-1.902 2.856-4.093 2.856-6.57 0-2.471-.953-4.661-2.856-6.563L51.107 261.233l112.204-112.201c1.906-1.902 2.856-4.093 2.856-6.567zM519.614 254.663L386.567 121.619c-1.902-1.902-4.093-2.857-6.563-2.857-2.478 0-4.661.955-6.57 2.857l-14.271 14.275c-1.902 1.903-2.851 4.09-2.851 6.567s.948 4.665 2.851 6.567l112.206 112.204-112.206 112.21c-1.902 1.902-2.851 4.093-2.851 6.563 0 2.478.948 4.668 2.851 6.57l14.271 14.268c1.909 1.906 4.093 2.854 6.57 2.854 2.471 0 4.661-.951 6.563-2.854L519.614 267.8c1.903-1.902 2.854-4.096 2.854-6.57 0-2.475-.951-4.665-2.854-6.567z",
     __source: {
       fileName: _jsxFileName,
@@ -26266,6 +26276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/common-util/code-panel/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
 
 
 
@@ -26314,32 +26325,32 @@ function (_Component) {
           code = _this$props.code,
           children = _this$props.children;
       var isOpen = this.state.isOpen;
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      return __jsx(_styles__WEBPACK_IMPORTED_MODULE_9__["default"], {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 19
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_9__["Row"], {
+      }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_9__["Row"], {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 20
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_headers__WEBPACK_IMPORTED_MODULE_10__["H3"], {
+      }, __jsx(_headers__WEBPACK_IMPORTED_MODULE_10__["H3"], {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 21
         },
         __self: this
-      }, heading), code && react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_code_icon__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      }, heading), code && __jsx(_code_icon__WEBPACK_IMPORTED_MODULE_12__["default"], {
         onClick: this.toggleOpen,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 22
         },
         __self: this
-      })), isOpen && react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_9__["CodeParent"], {
+      })), isOpen && __jsx(_styles__WEBPACK_IMPORTED_MODULE_9__["CodeParent"], {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 24
@@ -26521,6 +26532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common-util/paragraph */ "./common-util/paragraph/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles */ "./components/Home/Banner/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/Banner/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -26528,73 +26540,73 @@ var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/co
 
 
 var Hero = function Hero() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["Section"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["Section"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["Row"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["Row"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_tag__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, __jsx(_common_util_tag__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 13
     },
     __self: this
-  }, "MIT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_tag__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "MIT"), __jsx(_common_util_tag__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14
     },
     __self: this
-  }, "Open Source")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_headers__WEBPACK_IMPORTED_MODULE_2__["H1"], {
+  }, "Open Source")), __jsx(_common_util_headers__WEBPACK_IMPORTED_MODULE_2__["H1"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 16
     },
     __self: this
-  }, "CogoToast"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_headers__WEBPACK_IMPORTED_MODULE_2__["H2"], {
+  }, "CogoToast"), __jsx(_common_util_headers__WEBPACK_IMPORTED_MODULE_2__["H2"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17
     },
     __self: this
-  }, "Beautiful, Zero-Configuration, Toast Messages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["Section"], {
+  }, "Beautiful, Zero-Configuration, Toast Messages")), __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["Section"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 19
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 20
     },
     __self: this
-  }, "- Plug & Play. No configuration required"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "- Plug & Play. No configuration required"), __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21
     },
     __self: this
-  }, "~ 4K Gzipped (All Inclusive of Icons, Styles, & Code)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "~ 4K Gzipped (All Inclusive of Icons, Styles, & Code)"), __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22
     },
     __self: this
-  }, "- Completely Customizable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "- Completely Customizable"), __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23
@@ -26660,6 +26672,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common-util/button */ "./common-util/button/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles */ "./components/Home/Gzipped/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/Gzipped/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -26667,38 +26680,38 @@ var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/co
 
 
 var Types = function Types() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
     heading: "Only ~ 4K Gzipped",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
     },
     __self: this
-  }, "The package contains the minified build file, along with the SVG Icons and the Styles"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "The package contains the minified build file, along with the SVG Icons and the Styles"), __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15
     },
     __self: this
-  }, "Built into the Code, with a total of ~4K Gzipped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, "Built into the Code, with a total of ~4K Gzipped")), __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, __jsx("a", {
     href: "https://github.com/Cogoport/cogo-toast",
     target: "_blank",
     rel: "noopener",
@@ -26707,7 +26720,7 @@ var Types = function Types() {
       lineNumber: 18
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "info",
     __source: {
       fileName: _jsxFileName,
@@ -26756,10 +26769,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/MadeWithLove/heart-icon.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 var SvgComponent = function SvgComponent(props) {
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  return __jsx("svg", Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     width: 15,
     height: 15,
     style: {
@@ -26772,7 +26786,7 @@ var SvgComponent = function SvgComponent(props) {
       lineNumber: 4
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("path", {
+  }), __jsx("path", {
     d: "M24.85 10.126c2.018-4.783 6.628-8.125 11.99-8.125 7.223 0 12.425 6.179 13.079 13.543 0 0 .353 1.828-.424 5.119-1.058 4.482-3.545 8.464-6.898 11.503L24.85 48 7.402 32.165c-3.353-3.038-5.84-7.021-6.898-11.503-.777-3.291-.424-5.119-.424-5.119C.734 8.179 5.936 2 13.159 2c5.363 0 9.673 3.343 11.691 8.126z",
     fill: "#d75a4a",
     __source: {
@@ -26801,12 +26815,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles */ "./components/Home/MadeWithLove/styles.jsx");
 /* harmony import */ var _heart_icon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./heart-icon */ "./components/Home/MadeWithLove/heart-icon.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/MadeWithLove/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
 var MadeWithLove = function MadeWithLove() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_1__["Anchor"], {
+  return __jsx(_styles__WEBPACK_IMPORTED_MODULE_1__["Anchor"], {
     href: "https://www.cogoport.com",
     target: "_blank",
     rel: "noopener",
@@ -26815,19 +26830,19 @@ var MadeWithLove = function MadeWithLove() {
       lineNumber: 7
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8
     },
     __self: this
-  }, "Made with ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_heart_icon__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Made with ", __jsx(_heart_icon__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9
     },
     __self: this
-  }), "at", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_1__["Logo"], {
+  }), "at", __jsx(_styles__WEBPACK_IMPORTED_MODULE_1__["Logo"], {
     src: "https://www.cogoport.com/static/images/main_logo.svg",
     alt: "Cogoport - Simplifying International Logistics",
     __source: {
@@ -26906,6 +26921,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_headers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common-util/headers */ "./common-util/headers/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles */ "./components/Home/PlugPlay/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/PlugPlay/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -26915,51 +26931,51 @@ var installCode = "npm install --save cogo-toast\nyarn add cogo-toast";
 var importCode = "import cogoToast from 'cogo-toast';\ncogoToast.success(\"Success!\");";
 
 var Types = function Types() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
     heading: "Get Started, Plug & Play",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 16
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["Group"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["Group"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_headers__WEBPACK_IMPORTED_MODULE_3__["H4"], {
+  }, __jsx(_common_util_headers__WEBPACK_IMPORTED_MODULE_3__["H4"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 19
     },
     __self: this
-  }, "Install via NPM or Yarn"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_block__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Install via NPM or Yarn"), __jsx(_common_util_code_block__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "bash",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 20
     },
     __self: this
-  }, installCode)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["Group"], {
+  }, installCode)), __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["Group"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_headers__WEBPACK_IMPORTED_MODULE_3__["H4"], {
+  }, __jsx(_common_util_headers__WEBPACK_IMPORTED_MODULE_3__["H4"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23
     },
     __self: this
-  }, "Usage"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_block__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Usage"), __jsx(_common_util_code_block__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24
@@ -27018,6 +27034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common-util/button */ "./common-util/button/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles */ "./components/Home/Positions/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/Positions/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -27038,7 +27055,7 @@ var showMessageWithHeading = function showMessageWithHeading(position) {
   });
 };
 
-var codeBlock = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"].Block, {
+var codeBlock = __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"].Block, {
   __source: {
     fileName: _jsxFileName,
     lineNumber: 25
@@ -27047,7 +27064,7 @@ var codeBlock = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comm
 }, 'cogoToast.info("This is an info message", { position: \'top-center\', heading: \'Information\' });');
 
 var Positions = function Positions() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
     heading: "Positions & Heading",
     code: codeBlock,
     __source: {
@@ -27055,21 +27072,21 @@ var Positions = function Positions() {
       lineNumber: 31
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 32
     },
     __self: this
   }, positions.map(function (position) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["Group"], {
+    return __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["Group"], {
       key: position,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 34
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       className: "info",
       onClick: function onClick() {
         return showMessage(position);
@@ -27079,7 +27096,7 @@ var Positions = function Positions() {
         lineNumber: 35
       },
       __self: this
-    }, position), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, position), __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       className: "primary",
       onClick: function onClick() {
         return showMessageWithHeading(position);
@@ -27145,6 +27162,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common-util/button */ "./common-util/button/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles */ "./components/Home/Promise/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/Promise/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -27162,51 +27180,51 @@ var showToast = function showToast() {
 var code = "cogoToast.loading('Loading your data...').then(() => {\n  cogoToast.success('Data Successfully Loaded');\n});";
 
 var Types = function Types() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     heading: "Returns a Promise, With Useful Callbacks",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 26
     },
     __self: this
-  }, "Returns a promise which resolves when the toast is about to hide."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "Returns a promise which resolves when the toast is about to hide."), __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 27
     },
     __self: this
-  }, "This can be useful to do some action when the toast has completed showing.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
+  }, "This can be useful to do some action when the toast has completed showing.")), __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
     className: "code",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 31
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_block__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_common_util_code_block__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 32
     },
     __self: this
-  }, code), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, code), __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "primary",
     onClick: showToast,
     __source: {
@@ -27214,13 +27232,13 @@ var Types = function Types() {
       lineNumber: 33
     },
     __self: this
-  }, "Show Me")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
+  }, "Show Me")), __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 38
@@ -27279,6 +27297,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common-util/button */ "./common-util/button/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles */ "./components/Home/Types/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/Types/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -27303,7 +27322,8 @@ var showAll = function showAll() {
 var code = types.reduce(function (prev, type) {
   return "".concat(prev ? "".concat(prev, " \n") : '', " cogoToast.").concat(type, "('This is a ").concat(type, " message');");
 }, '');
-var codeBlock = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"].Block, {
+
+var codeBlock = __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"].Block, {
   __source: {
     fileName: _jsxFileName,
     lineNumber: 23
@@ -27312,7 +27332,7 @@ var codeBlock = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comm
 }, code);
 
 var Types = function Types() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
     heading: "5 Built in Types",
     code: codeBlock,
     __source: {
@@ -27320,14 +27340,14 @@ var Types = function Types() {
       lineNumber: 26
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 27
     },
     __self: this
   }, types.map(function (type) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       key: type,
       className: type,
       onClick: function onClick() {
@@ -27339,7 +27359,7 @@ var Types = function Types() {
       },
       __self: this
     }, type);
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  })), __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "primary",
     onClick: showAll,
     __source: {
@@ -27393,6 +27413,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_util_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common-util/button */ "./common-util/button/index.jsx");
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles */ "./components/Home/UseJSX/styles.jsx");
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/components/Home/UseJSX/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -27402,19 +27423,19 @@ var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/co
 
 
 var showToast = function showToast() {
-  cogo_toast__WEBPACK_IMPORTED_MODULE_1__["default"].info(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  cogo_toast__WEBPACK_IMPORTED_MODULE_1__["default"].info(__jsx("div", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+  }, __jsx("b", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15
     },
     __self: this
-  }, "Awesome!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Awesome!"), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 16
@@ -27426,45 +27447,45 @@ var showToast = function showToast() {
 var code = "cogoToast.info(\n  <div>\n    <b>Awesome!</b>\n    <div>Isn't it?</div>\n  </div>\n);";
 
 var UseJSX = function UseJSX() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return __jsx(_common_util_code_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     heading: "Use JSX",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 29
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 30
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
+  }, __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 31
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, __jsx(_common_util_paragraph__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 32
     },
     __self: this
-  }, "cogoToast is built using React. Which means any valid jsx can be used as the message in cogoToast")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
+  }, "cogoToast is built using React. Which means any valid jsx can be used as the message in cogoToast")), __jsx(_styles__WEBPACK_IMPORTED_MODULE_6__["Group"], {
     className: "code",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 37
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_code_block__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, __jsx(_common_util_code_block__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 38
     },
     __self: this
-  }, code), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_util_button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, code), __jsx(_common_util_button__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "primary",
     onClick: showToast,
     __source: {
@@ -27936,32 +27957,29 @@ function _typeof(obj) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/helpers/extends.js":
-/*!********************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/extends.js ***!
-  \********************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
+  return obj;
 }
 
-module.exports = _extends;
+module.exports = _defineProperty;
 
 /***/ }),
 
@@ -28170,7 +28188,7 @@ var createCache = function createCache(options) {
             var flag = 'emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason';
             var unsafePseudoClasses = content.match(/(:first|:nth|:nth-last)-child/g);
 
-            if (unsafePseudoClasses) {
+            if (unsafePseudoClasses && cache.compat !== true) {
               unsafePseudoClasses.forEach(function (unsafePseudoClass) {
                 var ignoreRegExp = new RegExp(unsafePseudoClass + ".*\\/\\* " + flag + " \\*\\/");
                 var ignore = ignoreRegExp.test(content);
@@ -28244,20 +28262,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var EmotionCacheContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])( Object(_emotion_cache__WEBPACK_IMPORTED_MODULE_2__["default"])() );
+var EmotionCacheContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])( // we're doing this to avoid preconstruct's dead code elimination in this one case
+// because this module is primarily intended for the browser and node
+// but it's also required in react native and similar environments sometimes
+// and we could have a special build just for that
+// but this is much easier and the native packages
+// might use a different theme context in the future anyway
+typeof HTMLElement !== 'undefined' ? Object(_emotion_cache__WEBPACK_IMPORTED_MODULE_2__["default"])() : null);
 var ThemeContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])({});
 var CacheProvider = EmotionCacheContext.Provider;
 
 var withEmotionCache = function withEmotionCache(func) {
   var render = function render(props, ref) {
-    return Object(react__WEBPACK_IMPORTED_MODULE_1__["createElement"])(EmotionCacheContext.Consumer, null, function ( // $FlowFixMe we know it won't be null
-    cache) {
+    return Object(react__WEBPACK_IMPORTED_MODULE_1__["createElement"])(EmotionCacheContext.Consumer, null, function (cache) {
       return func(props, cache, ref);
     });
   }; // $FlowFixMe
 
 
   return Object(react__WEBPACK_IMPORTED_MODULE_1__["forwardRef"])(render);
+};
+
+// thus we only need to replace what is a valid character for JS, but not for CSS
+
+var sanitizeIdentifier = function sanitizeIdentifier(identifier) {
+  return identifier.replace(/\$/g, '-');
 };
 
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
@@ -28356,15 +28385,15 @@ var jsx = function jsx(type, props) {
 
     if (error.stack) {
       // chrome
-      var match = error.stack.match(/at jsx.*\n\s+at ([A-Z][A-Za-z]+) /);
+      var match = error.stack.match(/at (?:Object\.|)jsx.*\n\s+at ([A-Z][A-Za-z$]+) /);
 
       if (!match) {
         // safari and firefox
-        match = error.stack.match(/^.*\n([A-Z][A-Za-z]+)@/);
+        match = error.stack.match(/^.*\n([A-Z][A-Za-z$]+)@/);
       }
 
       if (match) {
-        newProps[labelPropName] = match[1];
+        newProps[labelPropName] = sanitizeIdentifier(match[1]);
       }
     }
   }
@@ -28611,7 +28640,7 @@ var ClassNames = withEmotionCache(function (props, context) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _emotion_serialize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/serialize */ "./node_modules/@emotion/serialize/dist/serialize.browser.esm.js");
+/* harmony import */ var _emotion_serialize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/serialize */ "./node_modules/@emotion/css/node_modules/@emotion/serialize/dist/serialize.browser.esm.js");
 
 
 function css() {
@@ -28627,111 +28656,10 @@ function css() {
 
 /***/ }),
 
-/***/ "./node_modules/@emotion/hash/dist/hash.browser.esm.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@emotion/hash/dist/hash.browser.esm.js ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* eslint-disable */
-// murmurhash2 via https://github.com/garycourt/murmurhash-js/blob/master/murmurhash2_gc.js
-function murmurhash2_32_gc(str) {
-  var l = str.length,
-      h = l ^ l,
-      i = 0,
-      k;
-
-  while (l >= 4) {
-    k = str.charCodeAt(i) & 0xff | (str.charCodeAt(++i) & 0xff) << 8 | (str.charCodeAt(++i) & 0xff) << 16 | (str.charCodeAt(++i) & 0xff) << 24;
-    k = (k & 0xffff) * 0x5bd1e995 + (((k >>> 16) * 0x5bd1e995 & 0xffff) << 16);
-    k ^= k >>> 24;
-    k = (k & 0xffff) * 0x5bd1e995 + (((k >>> 16) * 0x5bd1e995 & 0xffff) << 16);
-    h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16) ^ k;
-    l -= 4;
-    ++i;
-  }
-
-  switch (l) {
-    case 3:
-      h ^= (str.charCodeAt(i + 2) & 0xff) << 16;
-
-    case 2:
-      h ^= (str.charCodeAt(i + 1) & 0xff) << 8;
-
-    case 1:
-      h ^= str.charCodeAt(i) & 0xff;
-      h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16);
-  }
-
-  h ^= h >>> 13;
-  h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16);
-  h ^= h >>> 15;
-  return (h >>> 0).toString(36);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (murmurhash2_32_gc);
-
-
-/***/ }),
-
-/***/ "./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js ***!
-  \*******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _emotion_memoize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/memoize */ "./node_modules/@emotion/memoize/dist/memoize.browser.esm.js");
-
-
-var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
-
-var index = Object(_emotion_memoize__WEBPACK_IMPORTED_MODULE_0__["default"])(function (prop) {
-  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
-  /* o */
-  && prop.charCodeAt(1) === 110
-  /* n */
-  && prop.charCodeAt(2) < 91;
-}
-/* Z+1 */
-);
-
-/* harmony default export */ __webpack_exports__["default"] = (index);
-
-
-/***/ }),
-
-/***/ "./node_modules/@emotion/memoize/dist/memoize.browser.esm.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@emotion/memoize/dist/memoize.browser.esm.js ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function memoize(fn) {
-  var cache = {};
-  return function (arg) {
-    if (cache[arg] === undefined) cache[arg] = fn(arg);
-    return cache[arg];
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (memoize);
-
-
-/***/ }),
-
-/***/ "./node_modules/@emotion/serialize/dist/serialize.browser.esm.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@emotion/serialize/dist/serialize.browser.esm.js ***!
-  \***********************************************************************/
+/***/ "./node_modules/@emotion/css/node_modules/@emotion/serialize/dist/serialize.browser.esm.js":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/@emotion/css/node_modules/@emotion/serialize/dist/serialize.browser.esm.js ***!
+  \*************************************************************************************************/
 /*! exports provided: serializeStyles */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -29018,6 +28946,420 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
 
 /***/ }),
 
+/***/ "./node_modules/@emotion/hash/dist/hash.browser.esm.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@emotion/hash/dist/hash.browser.esm.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* eslint-disable */
+// murmurhash2 via https://github.com/garycourt/murmurhash-js/blob/master/murmurhash2_gc.js
+function murmurhash2_32_gc(str) {
+  var l = str.length,
+      h = l ^ l,
+      i = 0,
+      k;
+
+  while (l >= 4) {
+    k = str.charCodeAt(i) & 0xff | (str.charCodeAt(++i) & 0xff) << 8 | (str.charCodeAt(++i) & 0xff) << 16 | (str.charCodeAt(++i) & 0xff) << 24;
+    k = (k & 0xffff) * 0x5bd1e995 + (((k >>> 16) * 0x5bd1e995 & 0xffff) << 16);
+    k ^= k >>> 24;
+    k = (k & 0xffff) * 0x5bd1e995 + (((k >>> 16) * 0x5bd1e995 & 0xffff) << 16);
+    h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16) ^ k;
+    l -= 4;
+    ++i;
+  }
+
+  switch (l) {
+    case 3:
+      h ^= (str.charCodeAt(i + 2) & 0xff) << 16;
+
+    case 2:
+      h ^= (str.charCodeAt(i + 1) & 0xff) << 8;
+
+    case 1:
+      h ^= str.charCodeAt(i) & 0xff;
+      h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16);
+  }
+
+  h ^= h >>> 13;
+  h = (h & 0xffff) * 0x5bd1e995 + (((h >>> 16) * 0x5bd1e995 & 0xffff) << 16);
+  h ^= h >>> 15;
+  return (h >>> 0).toString(36);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (murmurhash2_32_gc);
+
+
+/***/ }),
+
+/***/ "./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _emotion_memoize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/memoize */ "./node_modules/@emotion/memoize/dist/memoize.browser.esm.js");
+
+
+var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
+
+var index = Object(_emotion_memoize__WEBPACK_IMPORTED_MODULE_0__["default"])(function (prop) {
+  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
+  /* o */
+  && prop.charCodeAt(1) === 110
+  /* n */
+  && prop.charCodeAt(2) < 91;
+}
+/* Z+1 */
+);
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/***/ }),
+
+/***/ "./node_modules/@emotion/memoize/dist/memoize.browser.esm.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@emotion/memoize/dist/memoize.browser.esm.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function memoize(fn) {
+  var cache = {};
+  return function (arg) {
+    if (cache[arg] === undefined) cache[arg] = fn(arg);
+    return cache[arg];
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (memoize);
+
+
+/***/ }),
+
+/***/ "./node_modules/@emotion/serialize/dist/serialize.browser.esm.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@emotion/serialize/dist/serialize.browser.esm.js ***!
+  \***********************************************************************/
+/*! exports provided: serializeStyles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "serializeStyles", function() { return serializeStyles; });
+/* harmony import */ var _emotion_hash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @emotion/hash */ "./node_modules/@emotion/hash/dist/hash.browser.esm.js");
+/* harmony import */ var _emotion_unitless__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @emotion/unitless */ "./node_modules/@emotion/unitless/dist/unitless.browser.esm.js");
+/* harmony import */ var _emotion_memoize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/memoize */ "./node_modules/@emotion/memoize/dist/memoize.browser.esm.js");
+
+
+
+
+var ILLEGAL_ESCAPE_SEQUENCE_ERROR = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
+var hyphenateRegex = /[A-Z]|^ms/g;
+var animationRegex = /_EMO_([^_]+?)_([^]*?)_EMO_/g;
+
+var isCustomProperty = function isCustomProperty(property) {
+  return property.charCodeAt(1) === 45;
+};
+
+var processStyleName = Object(_emotion_memoize__WEBPACK_IMPORTED_MODULE_2__["default"])(function (styleName) {
+  return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
+});
+
+var processStyleValue = function processStyleValue(key, value) {
+  if (value == null || typeof value === 'boolean') {
+    return '';
+  }
+
+  switch (key) {
+    case 'animation':
+    case 'animationName':
+      {
+        if (typeof value === 'string') {
+          return value.replace(animationRegex, function (match, p1, p2) {
+            cursor = {
+              name: p1,
+              styles: p2,
+              next: cursor
+            };
+            return p1;
+          });
+        }
+      }
+  }
+
+  if (_emotion_unitless__WEBPACK_IMPORTED_MODULE_1__["default"][key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) {
+    return value + 'px';
+  }
+
+  return value;
+};
+
+if (true) {
+  var contentValuePattern = /(attr|calc|counters?|url)\(/;
+  var contentValues = ['normal', 'none', 'counter', 'open-quote', 'close-quote', 'no-open-quote', 'no-close-quote', 'initial', 'inherit', 'unset'];
+  var oldProcessStyleValue = processStyleValue;
+  var msPattern = /^-ms-/;
+  var hyphenPattern = /-(.)/g;
+  var hyphenatedCache = {};
+
+  processStyleValue = function processStyleValue(key, value) {
+    if (key === 'content') {
+      if (typeof value !== 'string' || contentValues.indexOf(value) === -1 && !contentValuePattern.test(value) && (value.charAt(0) !== value.charAt(value.length - 1) || value.charAt(0) !== '"' && value.charAt(0) !== "'")) {
+        console.error("You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"" + value + "\"'`");
+      }
+    }
+
+    var processed = oldProcessStyleValue(key, value);
+
+    if (processed !== '' && !isCustomProperty(key) && key.indexOf('-') !== -1 && hyphenatedCache[key] === undefined) {
+      hyphenatedCache[key] = true;
+      console.error("Using kebab-case for css properties in objects is not supported. Did you mean " + key.replace(msPattern, 'ms-').replace(hyphenPattern, function (str, _char) {
+        return _char.toUpperCase();
+      }) + "?");
+    }
+
+    return processed;
+  };
+}
+
+var shouldWarnAboutInterpolatingClassNameFromCss = true;
+
+function handleInterpolation(mergedProps, registered, interpolation, couldBeSelectorInterpolation) {
+  if (interpolation == null) {
+    return '';
+  }
+
+  if (interpolation.__emotion_styles !== undefined) {
+    if ( true && interpolation.toString() === 'NO_COMPONENT_SELECTOR') {
+      throw new Error('Component selectors can only be used in conjunction with babel-plugin-emotion.');
+    }
+
+    return interpolation;
+  }
+
+  switch (typeof interpolation) {
+    case 'boolean':
+      {
+        return '';
+      }
+
+    case 'object':
+      {
+        if (interpolation.anim === 1) {
+          cursor = {
+            name: interpolation.name,
+            styles: interpolation.styles,
+            next: cursor
+          };
+          return interpolation.name;
+        }
+
+        if (interpolation.styles !== undefined) {
+          var next = interpolation.next;
+
+          if (next !== undefined) {
+            // not the most efficient thing ever but this is a pretty rare case
+            // and there will be very few iterations of this generally
+            while (next !== undefined) {
+              cursor = {
+                name: next.name,
+                styles: next.styles,
+                next: cursor
+              };
+              next = next.next;
+            }
+          }
+
+          var styles = interpolation.styles;
+
+          if ( true && interpolation.map !== undefined) {
+            styles += interpolation.map;
+          }
+
+          return styles;
+        }
+
+        return createStringFromObject(mergedProps, registered, interpolation);
+      }
+
+    case 'function':
+      {
+        if (mergedProps !== undefined) {
+          var previousCursor = cursor;
+          var result = interpolation(mergedProps);
+          cursor = previousCursor;
+          return handleInterpolation(mergedProps, registered, result, couldBeSelectorInterpolation);
+        } else if (true) {
+          console.error('Functions that are interpolated in css calls will be stringified.\n' + 'If you want to have a css call based on props, create a function that returns a css call like this\n' + 'let dynamicStyle = (props) => css`color: ${props.color}`\n' + 'It can be called directly with props or interpolated in a styled call like this\n' + "let SomeComponent = styled('div')`${dynamicStyle}`");
+        }
+      }
+    // eslint-disable-next-line no-fallthrough
+
+    default:
+      {
+        if (registered == null) {
+          return interpolation;
+        }
+
+        var cached = registered[interpolation];
+
+        if ( true && couldBeSelectorInterpolation && shouldWarnAboutInterpolatingClassNameFromCss && cached !== undefined) {
+          console.error('Interpolating a className from css`` is not recommended and will cause problems with composition.\n' + 'Interpolating a className from css`` will be completely unsupported in a future major version of Emotion');
+          shouldWarnAboutInterpolatingClassNameFromCss = false;
+        }
+
+        return cached !== undefined && !couldBeSelectorInterpolation ? cached : interpolation;
+      }
+  }
+}
+
+function createStringFromObject(mergedProps, registered, obj) {
+  var string = '';
+
+  if (Array.isArray(obj)) {
+    for (var i = 0; i < obj.length; i++) {
+      string += handleInterpolation(mergedProps, registered, obj[i], false);
+    }
+  } else {
+    for (var _key in obj) {
+      var value = obj[_key];
+
+      if (typeof value !== 'object') {
+        if (registered != null && registered[value] !== undefined) {
+          string += _key + "{" + registered[value] + "}";
+        } else {
+          string += processStyleName(_key) + ":" + processStyleValue(_key, value) + ";";
+        }
+      } else {
+        if (_key === 'NO_COMPONENT_SELECTOR' && "development" !== 'production') {
+          throw new Error('Component selectors can only be used in conjunction with babel-plugin-emotion.');
+        }
+
+        if (Array.isArray(value) && typeof value[0] === 'string' && (registered == null || registered[value[0]] === undefined)) {
+          for (var _i = 0; _i < value.length; _i++) {
+            string += processStyleName(_key) + ":" + processStyleValue(_key, value[_i]) + ";";
+          }
+        } else {
+          var interpolated = handleInterpolation(mergedProps, registered, value, false);
+
+          switch (_key) {
+            case 'animation':
+            case 'animationName':
+              {
+                string += processStyleName(_key) + ":" + interpolated + ";";
+                break;
+              }
+
+            default:
+              {
+                string += _key + "{" + interpolated + "}";
+              }
+          }
+        }
+      }
+    }
+  }
+
+  return string;
+}
+
+var labelPattern = /label:\s*([^\s;\n{]+)\s*;/g;
+var sourceMapPattern;
+
+if (true) {
+  sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//;
+} // this is the cursor for keyframes
+// keyframes are stored on the SerializedStyles object as a linked list
+
+
+var cursor;
+var serializeStyles = function serializeStyles(args, registered, mergedProps) {
+  if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && args[0].styles !== undefined) {
+    return args[0];
+  }
+
+  var stringMode = true;
+  var styles = '';
+  cursor = undefined;
+  var strings = args[0];
+
+  if (strings == null || strings.raw === undefined) {
+    stringMode = false;
+    styles += handleInterpolation(mergedProps, registered, strings, false);
+  } else {
+    if ( true && strings[0] === undefined) {
+      console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
+    }
+
+    styles += strings[0];
+  } // we start at 1 since we've already handled the first arg
+
+
+  for (var i = 1; i < args.length; i++) {
+    styles += handleInterpolation(mergedProps, registered, args[i], styles.charCodeAt(styles.length - 1) === 46);
+
+    if (stringMode) {
+      if ( true && strings[i] === undefined) {
+        console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
+      }
+
+      styles += strings[i];
+    }
+  }
+
+  var sourceMap;
+
+  if (true) {
+    styles = styles.replace(sourceMapPattern, function (match) {
+      sourceMap = match;
+      return '';
+    });
+  } // using a global regex with .exec is stateful so lastIndex has to be reset each time
+
+
+  labelPattern.lastIndex = 0;
+  var identifierName = '';
+  var match; // https://esbench.com/bench/5b809c2cf2949800a0f61fb5
+
+  while ((match = labelPattern.exec(styles)) !== null) {
+    identifierName += '-' + // $FlowFixMe we know it's not null
+    match[1];
+  }
+
+  var name = Object(_emotion_hash__WEBPACK_IMPORTED_MODULE_0__["default"])(styles) + identifierName;
+
+  if (true) {
+    return {
+      name: name,
+      styles: styles,
+      map: sourceMap,
+      next: cursor
+    };
+  }
+
+  return {
+    name: name,
+    styles: styles,
+    next: cursor
+  };
+};
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@emotion/sheet/dist/sheet.browser.esm.js":
 /*!***************************************************************!*\
   !*** ./node_modules/@emotion/sheet/dist/sheet.browser.esm.js ***!
@@ -29176,8 +29518,8 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/is-prop-valid */ "./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js");
@@ -29203,6 +29545,11 @@ var getDefaultShouldForwardProp = function getDefaultShouldForwardProp(tag) {
   // it's a lowercase character
   tag.charCodeAt(0) > 96 ? testOmitPropsOnStringTag : testOmitPropsOnComponent;
 };
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var ILLEGAL_ESCAPE_SEQUENCE_ERROR = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
 
 var createStyled = function createStyled(tag, options) {
   if (true) {
@@ -29244,11 +29591,19 @@ var createStyled = function createStyled(tag, options) {
     if (args[0] == null || args[0].raw === undefined) {
       styles.push.apply(styles, args);
     } else {
+      if ( true && args[0][0] === undefined) {
+        console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
+      }
+
       styles.push(args[0][0]);
       var len = args.length;
       var i = 1;
 
       for (; i < len; i++) {
+        if ( true && args[0][i] === undefined) {
+          console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
+        }
+
         styles.push(args[i], args[0][i]);
       }
     }
@@ -29324,7 +29679,7 @@ var createStyled = function createStyled(tag, options) {
     });
 
     Styled.withComponent = function (nextTag, nextOptions) {
-      return createStyled(nextTag, nextOptions !== undefined ? _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, options || {}, nextOptions) : options).apply(void 0, styles);
+      return createStyled(nextTag, nextOptions !== undefined ? _objectSpread({}, options || {}, {}, nextOptions) : options).apply(void 0, styles);
     };
 
     return Styled;
@@ -30577,10 +30932,10 @@ module.exports = function (exec) {
   !*** ./node_modules/core-js/library/modules/_global.js ***!
   \*********************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports =  true && window.Math == Math
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
   ? window : typeof self != 'undefined' && self.Math == Math ? self
   // eslint-disable-next-line no-new-func
   : Function('return this')();
@@ -31097,7 +31452,7 @@ var toIObject = __webpack_require__(/*! ./_to-iobject */ "./node_modules/core-js
 var gOPN = __webpack_require__(/*! ./_object-gopn */ "./node_modules/core-js/library/modules/_object-gopn.js").f;
 var toString = {}.toString;
 
-var windowNames =  true && window && Object.getOwnPropertyNames
+var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
   ? Object.getOwnPropertyNames(window) : [];
 
 var getWindowNames = function (it) {
@@ -32118,12 +32473,12 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ "./node_modules/object-assign/index.js":
 /*!***************************************************************************************************!*\
-  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_7aff549c98b978433226 ***!
+  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_01f9a3fa864a7b7414d8 ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_7aff549c98b978433226 */ "dll-reference dll_7aff549c98b978433226"))("./node_modules/object-assign/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_01f9a3fa864a7b7414d8 */ "dll-reference dll_01f9a3fa864a7b7414d8"))("./node_modules/object-assign/index.js");
 
 /***/ }),
 
@@ -35958,12 +36313,12 @@ module.exports = theme;
 
 /***/ "./node_modules/prop-types/checkPropTypes.js":
 /*!*********************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_7aff549c98b978433226 ***!
+  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_01f9a3fa864a7b7414d8 ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_7aff549c98b978433226 */ "dll-reference dll_7aff549c98b978433226"))("./node_modules/prop-types/checkPropTypes.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_01f9a3fa864a7b7414d8 */ "dll-reference dll_01f9a3fa864a7b7414d8"))("./node_modules/prop-types/checkPropTypes.js");
 
 /***/ }),
 
@@ -36598,12 +36953,12 @@ if (true) {
 
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*******************************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_7aff549c98b978433226 ***!
+  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_01f9a3fa864a7b7414d8 ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_7aff549c98b978433226 */ "dll-reference dll_7aff549c98b978433226"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_01f9a3fa864a7b7414d8 */ "dll-reference dll_01f9a3fa864a7b7414d8"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
 
 /***/ }),
 
@@ -36865,12 +37220,43 @@ if (false) {} else {
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_7aff549c98b978433226 ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_01f9a3fa864a7b7414d8 ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_7aff549c98b978433226 */ "dll-reference dll_7aff549c98b978433226"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_01f9a3fa864a7b7414d8 */ "dll-reference dll_01f9a3fa864a7b7414d8"))("./node_modules/react/index.js");
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 
@@ -36896,6 +37282,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Home_MadeWithLove__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Home/MadeWithLove */ "./components/Home/MadeWithLove/index.jsx");
 
 var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/pages/index.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
@@ -36907,55 +37294,55 @@ var _jsxFileName = "/Users/anmolmahatpurkar/Projects/Cogoport/cogo-toast/docs/pa
 
 
 var Home = function Home() {
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_Banner__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, __jsx(_components_Home_Banner__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_Types__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), __jsx(_components_Home_Types__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 16
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_PlugPlay__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), __jsx(_components_Home_PlugPlay__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_Positions__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), __jsx(_components_Home_Positions__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_UseJSX__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), __jsx(_components_Home_UseJSX__WEBPACK_IMPORTED_MODULE_7__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 19
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_Promise__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), __jsx(_components_Home_Promise__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 20
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Home_MadeWithLove__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), __jsx(_components_Home_MadeWithLove__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(StarContainer, {
+  }), __jsx(StarContainer, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+  }, __jsx("a", {
     className: "github-button",
     href: "https://github.com/Cogoport/cogo-toast",
     "data-size": "large",
@@ -37017,14 +37404,14 @@ module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absol
 
 /***/ }),
 
-/***/ "dll-reference dll_7aff549c98b978433226":
+/***/ "dll-reference dll_01f9a3fa864a7b7414d8":
 /*!*******************************************!*\
-  !*** external "dll_7aff549c98b978433226" ***!
+  !*** external "dll_01f9a3fa864a7b7414d8" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_7aff549c98b978433226;
+module.exports = dll_01f9a3fa864a7b7414d8;
 
 /***/ })
 
