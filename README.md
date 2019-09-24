@@ -118,7 +118,7 @@ Here's a list of all the available options, to customize the toast to your needs
 | onClick() |                                             Function                                             |                           `null`                           |
 | role |                                             aria-role                                             |                           `status`                           |
 
-#### Custom Styling
+### Custom Styling
 
 You can provide your own custom styling by extending the `ct-toast` class in your css styles.
 
