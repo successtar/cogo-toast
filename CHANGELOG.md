@@ -1,5 +1,9 @@
 ### Features
 
+- 4.1.0
+
+  - Added a new option `toastContainerID`. This enables specifying the id of the parent dom element, to which the toast is mounted as a child. #27
+
 - 4.0.0
 
   - Breaking Change

@@ -119,7 +119,7 @@ Here's a list of all the available options, to customize the toast to your needs
 |      bar      |           Object <br /> `{ size: '2px', style: 'solid/dashed/dotted', color: '#hex' }`           |                     Based on the Type                      |
 | onClick() |                                             Function                                             |                           `null`                           |
 | role |                                             aria-role                                             |                           `status`                           |
-| toastContainerID |                                             String                                        |                           `ct-container`                           |
+| toastContainerID |                   The dom element in which the toast container is added                                         |                           `ct-container`                           |
 
 ### Custom Styling
 
