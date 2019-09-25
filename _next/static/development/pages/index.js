@@ -416,7 +416,7 @@ styleInject(css);
 var ctToastCount = 0;
 
 var cogoToast = function cogoToast(text, options) {
-  var rootContainer = document.getElementById('ct-container');
+  var rootContainer = document.getElementById(options.toastContainerID || 'ct-container');
 
   if (!rootContainer) {
     rootContainer = document.createElement('div');
