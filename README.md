@@ -119,6 +119,7 @@ Here's a list of all the available options, to customize the toast to your needs
 |      bar      |           Object <br /> `{ size: '2px', style: 'solid/dashed/dotted', color: '#hex' }`           |                     Based on the Type                      |
 | onClick() |                                             Function                                             |                           `null`                           |
 | role |                                             aria-role                                             |                           `status`                           |
+| toastContainerID |                                             String                                        |                           `ct-container`                           |
 
 ### Custom Styling
 
@@ -141,6 +142,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/anmolmahatpurkar"><img src="https://avatars2.githubusercontent.com/u/36692003?v=4" width="100px;" alt="Anmol Mahatpurkar"/><br /><sub><b>Anmol Mahatpurkar</b></sub></a><br /><a href="https://github.com/Cogoport/cogo-toast/commits?author=anmolmahatpurkar" title="Code">💻</a> <a href="#design-anmolmahatpurkar" title="Design">🎨</a> <a href="https://github.com/Cogoport/cogo-toast/commits?author=anmolmahatpurkar" title="Documentation">📖</a></td>
     <td align="center"><a href="https://balazsorban.com"><img src="https://avatars1.githubusercontent.com/u/18369201?v=4" width="100px;" alt="Balázs Orbán"/><br /><sub><b>Balázs Orbán</b></sub></a><br /><a href="https://github.com/Cogoport/cogo-toast/commits?author=balazsorban44" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Keaws"><img src="https://avatars1.githubusercontent.com/u/5289466?v=4" width="100px;" alt="Vitalii Kalchuk"/><br /><sub><b>Vitalii Kalchuk</b></sub></a><br /><a href="https://github.com/Cogoport/cogo-toast/commits?author=Keaws" title="Code">💻</a></td>
     <td align="center"><a href="http://www.apathak.com"><img src="https://avatars1.githubusercontent.com/u/24917309?v=4" width="100px;" alt="Amar Pathak"/><br /><sub><b>Amar Pathak</b></sub></a><br /><a href="https://github.com/Cogoport/cogo-toast/commits?author=amarpathak" title="Documentation">📖</a></td>
   </tr>
 </table>
