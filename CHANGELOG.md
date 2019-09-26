@@ -1,5 +1,9 @@
 ### Features
 
+- 4.1.1
+
+  - Added missing types for 4.0, role, and toastContainerID. #71
+
 - 4.1.0
 
   - Added a new option `toastContainerID`. This enables specifying the id of the parent dom element, to which the toast is mounted as a child. #27
