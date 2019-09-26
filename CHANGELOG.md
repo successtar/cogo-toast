@@ -2,7 +2,7 @@
 
 - 4.1.1
 
-  - Added missing types for 4.0, role, and toastContainerID. #71
+  - Added missing types for 4.0, role, and toastContainerID. #35
 
 - 4.1.0
 
