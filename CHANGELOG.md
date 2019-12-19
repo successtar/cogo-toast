@@ -1,6 +1,6 @@
 ### Features
 
-- 4.1.2
+- 4.1.3
 
   - Fixes #44 and #45
 
