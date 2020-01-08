@@ -1,8 +1,15 @@
 ### Features
 
+- 4.2.0
+
+  - Refactored entire codebase to TypeScript.
+  - Switched from yarn to pnpm to manage package dependencies.
+  - Bundle Size reduced to 4 KB
+  - No change to the package API or features. Everything should work as before.
+
 - 4.2.0-beta.0
 
-  - Refactored entire codebase to TypeScript. 
+  - Refactored entire codebase to TypeScript.
   - Switched from yarn to pnpm to manage package dependencies.
   - Bundle Size reduced to 4 KB
   - No change to the package API or features. Everything should work as before.
@@ -22,6 +29,7 @@
 - 4.0.0
 
   - Breaking Change
+
     - Hide the toast on Click
 
     Before:
@@ -69,9 +77,9 @@
 
   ```javascript
   cogoToast.success('This is a success message.', {
-    onClick: hide => {
-      hide();
-    },
+  	onClick: (hide) => {
+  		hide();
+  	},
   });
   ```
 

@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react';
+import { ReactNode, MouseEventHandler } from 'react';
 
 export type CTOptions = Partial<{
 	hideAfter: number;
@@ -25,9 +25,12 @@ export type HideToastFunction = () => void;
 
 export type CTReturn = Promise<void> & { hide?: HideToastFunction };
 
-export type CTMethod = (message: string, options?: CTOptions) => CTReturn;
+export type CTMethod = (message: string | ReactNode, options?: CTOptions) => CTReturn;
 
-export type CTMainMethod = (message: string, options?: CTOptions & { type: string }) => CTReturn;
+export type CTMainMethod = (
+	message: string | ReactNode,
+	options?: CTOptions & { type: string },
+) => CTReturn;
 
 export type CToast = CTMainMethod & {
 	success: CTMethod;
@@ -44,3 +47,5 @@ declare namespace cogoToast {
 	const warn: CTMethod;
 	const error: CTMethod;
 }
+
+export default cogoToast;
