@@ -1,5 +1,12 @@
 ### Features
 
+- 4.2.0-beta.0
+
+  - Refactored entire codebase to TypeScript. 
+  - Switched from yarn to pnpm to manage package dependencies.
+  - Bundle Size reduced to 4 KB
+  - No change to the package API or features. Everything should work as before.
+
 - 4.1.3
 
   - Fixes #44 and #45
