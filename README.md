@@ -1,6 +1,6 @@
 <p align="center"><img src="https://cogoport.github.io/cogo-toast/meta/android-chrome-96x96.png" alt="cogo-toast" title="cogo-toast" width="120"><p>
 <h1 align="center">Cogo Toast</h1>
-<p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React ~4kb Gzipped (with styles and icons)</p>
+<p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React ~4kb gzip (with styles and icons)</p>
 <p align="center"><a href="https://cogoport.github.io/cogo-toast/">https://cogoport.github.io/cogo-toast/</a></p>
 
 [![Dependencies](https://img.shields.io/david/Cogoport/cogo-toast.svg)](https://david-dm.org/Cogoport/cogo-toast.svg)
@@ -127,9 +127,9 @@ You can provide your own custom styling by extending the `ct-toast` class in you
 
 For all classnames, refer to [/src/styles/styles.css](/src/styles/styles.css)
 
-### Only ~ 4kb Gzipped (with Styles and Icons)
+### Only ~ 4kb gzip (with Styles and Icons)
 
-The package contains the minified build file, along with the SVG Icons and the Styles, built into the Code, with a total of only ~4kb gzipped.
+The package contains the minified build file, along with the SVG Icons and the Styles, built into the Code, with a total of only ~4kb gzip.
 
 ## Contributors ✨
 
