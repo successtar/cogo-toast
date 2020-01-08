@@ -127,9 +127,9 @@ You can provide your own custom styling by extending the `ct-toast` class in you
 
 For all classnames, refer to [/src/styles/styles.css](/src/styles/styles.css)
 
-### Only ~ 4K Gzipped
+### Only ~ 4kb Gzipped (with Styles and Icons)
 
-The package contains the minified build file, along with the SVG Icons and the Styles, built into the Code, with a total of ~4K Gzipped
+The package contains the minified build file, along with the SVG Icons and the Styles, built into the Code, with a total of only ~4kb gzipped.
 
 ## Contributors ✨
 
