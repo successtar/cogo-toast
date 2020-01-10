@@ -70,6 +70,7 @@ var Icons = {
     info: info,
     error: error,
 };
+//# sourceMappingURL=Icons.js.map
 
 var colors = {
     success: '#6EC05F',
@@ -156,6 +157,7 @@ Toast.defaultProps = {
     onClick: undefined,
     role: 'status',
 };
+//# sourceMappingURL=Toast.js.map
 
 var camelCase = function (str) { return str.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }); };
 var defaultToasts = {
@@ -190,7 +192,7 @@ var ToastContainer = function (_a) {
     return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, rows.map(function (row) { return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { key: "row_" + row, className: "ct-row" }, groups.map(function (group) {
         var type = "" + row + group;
         var className = ['ct-group', row === 'bottom' ? 'ct-flex-bottom' : ''].join(' ');
-        return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { key: type, className: className }, allToasts[type].map(function (item) { return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Toast, { key: type + "_" + item.id, id: item.id, text: item.text, type: item.type, onClick: item.onClick, hideAfter: item.hideAfter, show: hiddenID !== item.id, onHide: handleRemove })); })));
+        return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", { key: type, className: className }, allToasts[type].map(function (item) { return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Toast, __assign({ key: type + "_" + item.id }, item, { id: item.id, text: item.text, type: item.type, onClick: item.onClick, hideAfter: item.hideAfter, show: hiddenID !== item.id, onHide: handleRemove }))); })));
     }))); })));
 };
 ToastContainer.propTypes = {
@@ -201,6 +203,7 @@ ToastContainer.defaultProps = {
     toast: undefined,
     hiddenID: undefined,
 };
+//# sourceMappingURL=ToastContainer.js.map
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -261,6 +264,7 @@ cogoToast.warn = function (t, o) { return cogoToast(t, __assign(__assign({}, o),
 cogoToast.info = function (t, o) { return cogoToast(t, __assign(__assign({}, o), { type: 'info' })); };
 cogoToast.error = function (t, o) { return cogoToast(t, __assign(__assign({}, o), { type: 'error' })); };
 cogoToast.loading = function (t, o) { return cogoToast(t, __assign(__assign({}, o), { type: 'loading' })); };
+//# sourceMappingURL=index.js.map
 
 /* harmony default export */ __webpack_exports__["default"] = (cogoToast);
 
