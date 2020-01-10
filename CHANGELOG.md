@@ -1,5 +1,11 @@
 ### Features
 
+
+- 4.2.1
+
+  - Fix: Heading and renderIcon not being passed to the toast component
+
+
 - 4.2.0
 
   - Refactored entire codebase to TypeScript.

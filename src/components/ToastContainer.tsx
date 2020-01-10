@@ -66,6 +66,7 @@ const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => 
 								{allToasts[type].map((item: CToastItem) => (
 									<Toast
 										key={`${type}_${item.id}`}
+										{...item}
 										id={item.id}
 										text={item.text}
 										type={item.type}
