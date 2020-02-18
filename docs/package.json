@@ -6,24 +6,24 @@
 		"dev": "next",
 		"build": "next build",
 		"start": "next start",
-		"export": "pnpm run build && next export",
-		"deploy": "rm -rf node_modules/.cache && pnpm run export && touch out/.nojekyll"
+		"export": "yarn run build && next export",
+		"deploy": "rm -rf node_modules/.cache && yarn run export && touch out/.nojekyll"
 	},
 	"dependencies": {
 		"@emotion/core": "10.0.27",
 		"@emotion/styled": "10.0.27",
 		"babel-plugin-emotion": "10.0.27",
 		"cogo-toast": "link:../",
-		"next": "^9.1.7",
+		"next": "^9.2.1",
 		"prism-react-renderer": "^1.0.2",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
 	"devDependencies": {
-    "@types/node": "^13.1.4",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "typescript": "3.7.4",
+    "@types/node": "^13.7.1",
+    "@types/react": "^16.9.20",
+    "@types/react-dom": "^16.9.5",
+    "typescript": "3.7.5",
 		"serve": "11.3.0"
 	}
 }

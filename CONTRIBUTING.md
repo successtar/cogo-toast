@@ -6,12 +6,12 @@ Thanks for being willing to contribute!
 
 ### Prequisite
 
-The project uses pnpm as a package dependency. This is just an alternative for yarn / npm with certain benefits. Here is how to set it up https://pnpm.js.org/en/installation
+yarn - v1
 
 ### Environment
 
 1. Fork and clone the repo
-2. Run `pnpm run setup` to install dependencies
+2. Run `yarn install` to install dependencies
 3. Create a branch for your PR with `git checkout -b pr/your-branch-name`
 
 > Tip: Keep your `master` branch pointing at the original repository and make
@@ -37,7 +37,7 @@ To add yourself to the table of contributors on the `README.md`, please use the
 automated script as part of your PR:
 
 ```console
-pnpm run add-contributor
+yarn add-contributor
 ```
 
 Follow the prompt and commit `.all-contributorsrc` and `README.md` in the PR.

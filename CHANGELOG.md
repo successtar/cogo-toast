@@ -1,5 +1,10 @@
 ### Features
 
+- 4.2.2
+
+  - Fix: useEffect not cancelling timeouts. #49
+  - Switched from pnpm to yarn to manage package dependencies - Better community support.
+
 - 4.2.1
 
   - Fix: Heading and renderIcon not being passed to the toast component

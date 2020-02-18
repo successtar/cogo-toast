@@ -54,15 +54,25 @@ const Toast: React.FC<CToastProps> = (props) => {
 	};
 
 	useEffect(() => {
-		setTimeout(() => {
+		const animTimeout = setTimeout(() => {
 			setAnimStyles({ opacity: 1, [marginType]: '15px' });
 		}, 50);
 
+		let hideTimeout;
+
 		if (props.hideAfter !== 0) {
-			setTimeout(() => {
+			hideTimeout = setTimeout(() => {
 				handleHide();
 			}, props.hideAfter * 1000);
 		}
+
+		return () => {
+			clearTimeout(animTimeout);
+
+			if (hideTimeout) {
+				clearTimeout(hideTimeout);
+			}
+		};
 	}, []);
 
 	useEffect(() => {
