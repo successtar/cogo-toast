@@ -10,11 +10,11 @@ webpackHotUpdate("static/development/pages/index.js",{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toast", function() { return Toast; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/.pnpm/registry.npmjs.org/react/16.12.0/node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../node_modules/.pnpm/registry.npmjs.org/react-dom/16.12.0_react@16.12.0/node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "../node_modules/.pnpm/registry.npmjs.org/prop-types/15.7.2/node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -101,15 +101,22 @@ var Toast = function (props) {
         }, 300);
     };
     Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-        setTimeout(function () {
+        var animTimeout = setTimeout(function () {
             var _a;
             setAnimStyles((_a = { opacity: 1 }, _a[marginType] = '15px', _a));
         }, 50);
+        var hideTimeout;
         if (props.hideAfter !== 0) {
-            setTimeout(function () {
+            hideTimeout = setTimeout(function () {
                 handleHide();
             }, props.hideAfter * 1000);
         }
+        return function () {
+            clearTimeout(animTimeout);
+            if (hideTimeout) {
+                clearTimeout(hideTimeout);
+            }
+        };
     }, []);
     Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
         if (!props.show) {
@@ -157,7 +164,6 @@ Toast.defaultProps = {
     onClick: undefined,
     role: 'status',
 };
-//# sourceMappingURL=Toast.js.map
 
 var camelCase = function (str) { return str.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }); };
 var defaultToasts = {
@@ -273,4 +279,4 @@ cogoToast.loading = function (t, o) { return cogoToast(t, __assign(__assign({}, 
 /***/ })
 
 })
-//# sourceMappingURL=index.js.9ebe8943336e25f60691.hot-update.js.map
+//# sourceMappingURL=index.js.0e535d8eb6624b29f219.hot-update.js.map
