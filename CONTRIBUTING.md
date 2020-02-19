@@ -11,7 +11,7 @@ yarn - v1
 ### Environment
 
 1. Fork and clone the repo
-2. Run `yarn install` to install dependencies
+2. Run `yarn setup` to install dependencies
 3. Create a branch for your PR with `git checkout -b pr/your-branch-name`
 
 > Tip: Keep your `master` branch pointing at the original repository and make

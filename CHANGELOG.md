@@ -1,5 +1,9 @@
 ### Features
 
+- 4.2.3
+
+  - Fix: install error at 4.2.2. #53
+
 - 4.2.2
 
   - Fix: useEffect not cancelling timeouts. #49
