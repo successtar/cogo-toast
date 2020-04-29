@@ -126,6 +126,17 @@ You can provide your own custom styling by extending the `ct-toast` class in you
 
 For all classnames, refer to [/src/styles/styles.css](/src/styles/styles.css)
 
+#### Customize each type of Toast seperately
+
+Customize each type of Toast seperately, by extending the `ct-toast-<type>` class. For example, in your CSS,
+
+```
+ct-toast-success {
+  color: #FFFFFF;
+  background: #6EC05F;
+}
+```
+
 ### Only ~ 4kb gzip (with Styles and Icons)
 
 The package contains the minified build file, along with the SVG Icons and the Styles, built into the Code, with a total of only ~4kb gzip.
