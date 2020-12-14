@@ -51,7 +51,7 @@ const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => 
 					[toastPosition]: prevToasts[toastPosition].filter((item: CToastItem) => item.id !== id),
 				};
 			});
-			callback(id, position);
+			typeof callback === 'function' && callback(id, position);
 		};
 	}
 
