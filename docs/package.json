@@ -14,7 +14,7 @@
 		"@emotion/styled": "10.0.27",
 		"babel-plugin-emotion": "10.0.33",
 		"cogo-toast": "link:../",
-		"next": "^9.4.1",
+		"next": "^12.1.0",
 		"prism-react-renderer": "^1.1.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
