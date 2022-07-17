@@ -1,6 +1,6 @@
 <p align="center"><a href="https://cogoport.github.io/cogo-toast/" target="_blank"><img src="https://cogoport.github.io/cogo-toast/meta/android-chrome-96x96.png" alt="cogo-toast" title="cogo-toast" width="120"></a></p>
 <h1 align="center">Cogo Toast</h1>
-<p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React ~4kb gzip (with styles and icons)</p>
+<p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React (^18.x.x) ~4kb gzip (with styles and icons)</p>
 <p align="center"><a href="https://cogoport.github.io/cogo-toast/">https://cogoport.github.io/cogo-toast/</a></p>
 
 [![Dependencies](https://img.shields.io/david/Cogoport/cogo-toast.svg)](https://david-dm.org/Cogoport/cogo-toast.svg)
