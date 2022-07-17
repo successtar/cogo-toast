@@ -24,10 +24,10 @@ const Home = () => (
 		<StarContainer>
 			<a
 				className="github-button"
-				href="https://github.com/Cogoport/cogo-toast"
+				href="https://github.com/successtar/cogo-toast"
 				data-size="large"
 				data-show-count="true"
-				aria-label="Star Cogoport/cogo-toast on GitHub"
+				aria-label="Star successtar/cogo-toast on GitHub"
 			>
 				Star on Github
 			</a>

@@ -14,7 +14,7 @@ const Gzipped = () => (
 			<Paragraph>Built into the Code, with a total of ~4K Gzipped</Paragraph>
 		</Section>
 		<Section>
-			<a href="https://github.com/Cogoport/cogo-toast" target="_blank" rel="noopener noreferrer">
+			<a href="https://github.com/successtar/cogo-toast" target="_blank" rel="noopener noreferrer">
 				<Button className="info">Check out on Github!</Button>
 			</a>
 		</Section>

@@ -5,10 +5,10 @@ import CodePanel from '../../common/CodePanel';
 import CodeBlock from '../../common/CodeBlock';
 import { H4 } from '../../common/Headers';
 
-const installCode = `npm install --save cogo-toast
-yarn add cogo-toast`;
+const installCode = `npm install --save @successtar/cogo-toast
+yarn add @successtar/cogo-toast`;
 
-const importCode = `import cogoToast from 'cogo-toast';
+const importCode = `import cogoToast from '@successtar/cogo-toast';
 cogoToast.success("Success!");`;
 
 const PlugPlay = () => (
