@@ -1,6 +1,6 @@
 {
-	"name": "cogo-toast",
-	"description": "Beautiful, Zero Configuration, Toast Messages - Built with React",
+	"name": "@successtar/cogo-toast",
+	"description": "Beautiful, Zero Configuration, Toast Messages - Built with React (^18.2.0)",
 	"version": "4.2.4",
 	"license": "MIT",
 	"scripts": {
@@ -19,8 +19,8 @@
 	},
 	"peerDependencies": {
 		"prop-types": "^15.6.2",
-		"react": "^16.8.0 || ^17.0.0",
-		"react-dom": "^16.8.0 || ^17.0.0"
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
 		"@babel/core": "7.9.6",
@@ -32,8 +32,8 @@
 		"@rollup/plugin-url": "^5.0.0",
 		"@types/jest": "^25.2.2",
 		"@types/prop-types": "^15.7.3",
-		"@types/react": "^16.9.35",
-		"@types/react-dom": "^16.9.8",
+		"@types/react": "^18.0.15",
+		"@types/react-dom": "^18.0.6",
 		"@typescript-eslint/eslint-plugin": "^2.33.0",
 		"@typescript-eslint/parser": "^2.33.0",
 		"@svgr/rollup": "5.4.0",
@@ -55,9 +55,9 @@
 		"prettier": "^2.0.5",
 		"prettier-eslint-cli": "^5.0.0",
 		"prop-types": "^15.7.2",
-		"react": "16.12.0",
-		"react-dom": "16.12.0",
-		"react-scripts": "3.4.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-scripts": "5.0.1",
 		"rollup": "^2.10.2",
 		"rollup-plugin-peer-deps-external": "^2.2.2",
 		"rollup-plugin-postcss": "3.1.1",
@@ -73,6 +73,9 @@
 		"dist",
 		"index.d.ts"
 	],
+	"publishConfig": {
+		"access": "public"
+	},
 	"homepage": "https://cogoport.github.io/cogo-toast/",
 	"bugs": {
 		"url": "https://github.com/Cogoport/cogo-toast/issues"
@@ -112,6 +115,11 @@
 			"name": "anmolmahatpurkar",
 			"email": "anmol@cogoport.com",
 			"url": "https://github.com/anmolmahatpurkar"
+		},
+		{
+			"name": "Hammed Olalekan Osanyinpeju",
+			"email": "osanyinpejuhammed35@gmail.com",
+			"url": "https://successtar.github.io"
 		}
 	]
 }

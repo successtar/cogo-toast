@@ -1,5 +1,9 @@
 ### Features
 
+- 5.0.1
+
+  - Fix: ReactDOM.render warning in React 18.x.x
+
 - 4.2.3
 
   - Fix: install error at 4.2.2. #53

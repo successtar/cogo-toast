@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 
 import ToastContainer from './components/ToastContainer';
 import Toast from './components/Toast';
@@ -23,11 +23,11 @@ const cogoToast: CToast = (text, options?) => {
 
 	const hideTime = (options?.hideAfter === undefined ? 3 : options.hideAfter) * 1000;
 	const toast = { id: ctToastCount, text, ...options };
-
-	ReactDOM.render(<ToastContainer toast={toast} />, rootContainer);
+	const root = createRoot(rootContainer); 
+	root.render(<ToastContainer toast={toast} />);
 
 	const hide = () => {
-		ReactDOM.render(<ToastContainer hiddenID={toast.id} />, rootContainer);
+		root.render(<ToastContainer hiddenID={toast.id} />);
 	};
 
 	const completePromise: CTReturn = new Promise<void>((resolve) => {
