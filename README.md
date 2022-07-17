@@ -3,17 +3,17 @@
 <p align="center"><a href="https://cogoport.github.io/cogo-toast/" target="_blank"><img src="https://cogoport.github.io/cogo-toast/meta/android-chrome-96x96.png" alt="cogo-toast" title="cogo-toast" width="120"></a></p>
 <h1 align="center">Cogo Toast</h1>
 <p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React ~4kb gzip (with styles and icons)</p>
-<p align="center"><a href="https://cogoport.github.io/cogo-toast/">https://cogoport.github.io/cogo-toast/</a></p>
+<p align="center"><a href="https://successtar.github.io/cogo-toast/">https://successtar.github.io/cogo-toast/</a></p>
 
 [![Dependencies](https://img.shields.io/david/Cogoport/cogo-toast.svg)](https://david-dm.org/Cogoport/cogo-toast.svg)
 [![npm package](https://img.shields.io/npm/v/@successtar/cogo-toast/latest.svg)](https://www.npmjs.com/package/@successtar/cogo-toast)
 [![Small size](https://img.badgesize.io/https://unpkg.com/cogo-toast/dist/index.js?compression=gzip)](https://unpkg.com/@successtar/cogo-toast/dist/index.js)
 [![npm downloads](https://img.shields.io/npm/dm/cogo-toast.svg)](https://www.npmjs.com/package/@successtar/cogo-toast)
 ![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
-[![License](https://img.shields.io/npm/l/@xstyled/styled-components.svg)](https://github.com/Cogoport/cogo-toast/blob/master/LICENSE)
+[![License](https://img.shields.io/npm/l/@xstyled/styled-components.svg)](https://github.com/successtar/cogo-toast/blob/master/LICENSE)
 
 <p align="center">
-<a href="https://cogoport.github.io/cogo-toast/" target="_blank"><img src="docs/public/images/preview.gif" alt="cogo-toast-preview" title="cogo-toast-preview"></a>
+<a href="https://successtar.github.io/cogo-toast/" target="_blank"><img src="docs/public/images/preview.gif" alt="cogo-toast-preview" title="cogo-toast-preview"></a>
 </p>
 
 ### Install via NPM:
