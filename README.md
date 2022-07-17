@@ -1,12 +1,14 @@
+<h2>Disclaimer:</h2>
+<p>This is a fork of Cogoport/cogo-toast with fixes for warnings in React <code>^18.x.x</code></p>
 <p align="center"><a href="https://cogoport.github.io/cogo-toast/" target="_blank"><img src="https://cogoport.github.io/cogo-toast/meta/android-chrome-96x96.png" alt="cogo-toast" title="cogo-toast" width="120"></a></p>
 <h1 align="center">Cogo Toast</h1>
-<p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React (^18.x.x) ~4kb gzip (with styles and icons)</p>
+<p align="center" style="font-size: 1.2rem;">Beautiful, Zero Configuration, Toast Messages for React ~4kb gzip (with styles and icons)</p>
 <p align="center"><a href="https://cogoport.github.io/cogo-toast/">https://cogoport.github.io/cogo-toast/</a></p>
 
 [![Dependencies](https://img.shields.io/david/Cogoport/cogo-toast.svg)](https://david-dm.org/Cogoport/cogo-toast.svg)
-[![npm package](https://img.shields.io/npm/v/cogo-toast/latest.svg)](https://www.npmjs.com/package/cogo-toast)
-[![Small size](https://img.badgesize.io/https://unpkg.com/cogo-toast/dist/index.js?compression=gzip)](https://unpkg.com/cogo-toast/dist/index.js)
-[![npm downloads](https://img.shields.io/npm/dm/cogo-toast.svg)](https://www.npmjs.com/package/cogo-toast)
+[![npm package](https://img.shields.io/npm/v/@successtar/cogo-toast/latest.svg)](https://www.npmjs.com/package/@successtar/cogo-toast)
+[![Small size](https://img.badgesize.io/https://unpkg.com/cogo-toast/dist/index.js?compression=gzip)](https://unpkg.com/@successtar/cogo-toast/dist/index.js)
+[![npm downloads](https://img.shields.io/npm/dm/cogo-toast.svg)](https://www.npmjs.com/package/@successtar/cogo-toast)
 ![Code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
 [![License](https://img.shields.io/npm/l/@xstyled/styled-components.svg)](https://github.com/Cogoport/cogo-toast/blob/master/LICENSE)
 
@@ -17,18 +19,26 @@
 ### Install via NPM:
 
 ```bash
-npm install --save cogo-toast
+npm install --save @successtar/cogo-toast
 ```
 
 ### Install via Yarn:
 
 ```bash
-yarn add cogo-toast
+yarn add @successtar/cogo-toast
 ```
 
 #### Note:
 
-The latest version `^3.0.0` makes the use of React Hooks internally.
+The latest version `^5.0.0` is only compatible with React `^18.0.0`.
+
+To use this package in projects with React below `18.0.0`.
+
+```bash
+yarn add cogo-toast@4.2.3
+```
+
+The version `^3.0.0` makes the use of React Hooks internally.
 
 To use this package in projects that don't support hooks, use `v2.0.1` instead.
 

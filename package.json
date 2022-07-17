@@ -76,13 +76,13 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"homepage": "https://cogoport.github.io/cogo-toast/",
+	"homepage": "https://successtar.github.io/cogo-toast/",
 	"bugs": {
-		"url": "https://github.com/Cogoport/cogo-toast/issues"
+		"url": "https://github.com/Cogoport/successtar/cogo-toast/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Cogoport/cogo-toast.git"
+		"url": "git+https://github.com/successtar/cogo-toast.git"
 	},
 	"keywords": [
 		"react",
