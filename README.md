@@ -38,7 +38,7 @@ To use this package in projects with React below `18.0.0`.
 yarn add cogo-toast@4.2.3
 ```
 
-The version `^3.0.0` makes the use of React Hooks internally.
+Version `^3.0.0` makes use of React Hooks internally.
 
 To use this package in projects that don't support hooks, use `v2.0.1` instead.
 
@@ -51,7 +51,7 @@ yarn add cogo-toast@2.0.1
 Its Plug and Play. No configuration required. Just import and you are good to go.
 
 ```javascript
-import cogoToast from 'cogo-toast';
+import cogoToast from '@successtar/cogo-toast';
 
 cogoToast.success('This is a success message!');
 ```
